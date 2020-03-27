@@ -10,3 +10,4 @@ edition = "2018"
 custom_error = "1.7.1"
 dirs = "2.0.2"
 chrono = "0.4"
+clap = {version = "2.33.0", features = ["yaml"] }

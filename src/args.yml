@@ -1,0 +1,16 @@
+name: rote
+version: "0.2"
+about: Simple note-taking tool for personal use
+author: Suede G <ymp17kwu@uea.ac.uk>
+
+settings:
+    - ArgRequiredElseHelp
+
+subcommands:
+    - add:
+        about: Adds a new note
+        args:
+            - title:
+                help: Name for the note
+                index: 1
+                required: true
