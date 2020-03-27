@@ -83,7 +83,7 @@ pub fn new_note(title: &str) -> Result<(), NotesError> {
     
     add_title(&title)?;
 
-    match Command::new("vim").arg(&target_uri).status() {
+    match Command::new("vim").args(&["+ normal G$", &target_uri]).status() {
         Ok(_x) => return Ok(()),
         Err(_e) => return Err(NotesError::FileNotFound)
     }
