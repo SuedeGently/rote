@@ -45,7 +45,7 @@ fn open() -> Result<String, NotesError> {
 /// Creates a file at the given path, then adds an h1 header to it with the
 /// current date.
 fn create(uri: &str) -> Result<(), NotesError> {
-    let mut header = format!("# {}", Local::today().format("%Y-%m-%d"));
+    let header = format!("# {}", Local::today().format("%Y-%m-%d"));
 
     let mut file = match File::create(uri) {
         Ok(x) => x,
@@ -82,6 +82,15 @@ pub fn new_note(title: &str) -> Result<(), NotesError> {
     let target_uri = open()?;
     
     add_title(&title)?;
+
+    match Command::new("vim").args(&["+ normal G$", &target_uri]).status() {
+        Ok(_x) => return Ok(()),
+        Err(_e) => return Err(NotesError::FileNotFound)
+    }
+}
+
+pub fn display() -> Result<(), NotesError> {
+    let target_uri = open()?;
 
     match Command::new("vim").args(&["+ normal G$", &target_uri]).status() {
         Ok(_x) => return Ok(()),

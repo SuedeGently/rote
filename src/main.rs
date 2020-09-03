@@ -12,5 +12,10 @@ fn main() {
             Ok(_x) => println!("Done."),
             Err(e) => panic!("{}", e)
         }
+    } else if let Some(_add_matches) = matches.subcommand_matches("open") {
+        match notes::display() {
+            Ok(_) => println!("Done"),
+            Err(e) => panic!("{}", e)
+        }
     }
 }
